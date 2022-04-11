@@ -399,8 +399,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 
 					DropdownItem.MouseButton1Click:Connect(function()
-						print(v)
-						DropdownTitle.Text = tostring(Title) .. " - " .. tostring(DropdownItem.Text)
+						DropdownTitle.Text = tostring(DropdownItem.Text)
 						DropToggled = false
 					end)
 				end
