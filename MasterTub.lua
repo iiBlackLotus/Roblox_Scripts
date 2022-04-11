@@ -607,7 +607,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
 		
-		function Containers:Keybind(Title, callback)
+		function Containers:Bind(Title, callback)
 			local keybind_data = {}
 			local KeybindTemplate = Instance.new("Frame")
 			local ButtonCorner_2 = Instance.new("UICorner")
