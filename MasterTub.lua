@@ -369,7 +369,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 
 			for i,v in next, List do
-					rconsoleprint("I = ",i,"V = ",v)
+				print(i,v)
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -398,7 +398,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						DropToggled = false
 					end)
 				end
-				dropfunc.Add(tostring(v))
+				dropfunc.Add(tostring(i))
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
 			end
