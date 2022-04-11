@@ -369,6 +369,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 			
 			for i,v in next, List do
+				
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -390,7 +391,10 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					ItemCorner.CornerRadius = UDim.new(0, 3)
 					ItemCorner.Name = "ItemCorner"
 					ItemCorner.Parent = DropdownItem
-
+					
+					DropdownItem.MouseButton1Click:Connect(function()
+						print("Hi","- ", DropdownItem.Name)
+					end)
 					DropdownItem.MouseButton1Click:Connect(function()
 						print("Click")
 							DropdownTitle.Text = Title .. " - " .. toadd
