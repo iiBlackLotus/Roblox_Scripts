@@ -395,11 +395,11 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 
 					DropdownItem.MouseButton1Click:Connect(function()
-						DropdownTitle.Text = tostring(Title) .. " - " .. tostring(toadd)
+						DropdownTitle.Text = tostring(Title) .. " - " .. tostring(v)
 						DropToggled = false
 					end)
 				end
-				dropfunc.Add(tostring(v))
+				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
 			end
