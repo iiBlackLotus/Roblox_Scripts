@@ -369,7 +369,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 
 			for i,v in next, List do
-
+					rconsoleprint("I = ",i,"V = ",v)
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -384,7 +384,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownItem.ZIndex = 10
 					DropdownItem.AutoButtonColor = true
 					DropdownItem.Font = Enum.Font.Gotham
-					DropdownItem.Text = v
+					DropdownItem.Text = tostring(v)
 					DropdownItem.TextColor3 = Color3.fromRGB(255, 255, 255)
 					DropdownItem.TextSize = 15.000
 					
