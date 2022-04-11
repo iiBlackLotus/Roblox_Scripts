@@ -409,7 +409,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						end
 					)
 				end
-
+				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 				
 			end
