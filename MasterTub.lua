@@ -370,7 +370,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 
 			for i, v in next, List do
-				print(i,v)
+		
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -395,6 +395,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 
 					DropdownItem.MouseButton1Click:Connect(function()
+						print(v)
 						DropdownTitle.Text = tostring(Title) .. " - " .. tostring(v)
 						DropToggled = false
 					end)
