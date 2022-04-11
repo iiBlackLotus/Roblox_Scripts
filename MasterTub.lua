@@ -270,7 +270,8 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 		function Containers:Dropdown(Title, List, Callback)
 			local DropdownOpen = true
-			local dropfunc = {};
+			local dropfunc = {}
+			
 			local DropToggled = false
 			local FrameSize = 0
 			local ItemCount = 0
@@ -368,7 +369,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				DropdownOpen = not DropdownOpen
 			end)
 
-			for i,v in next, List do
+			for i, v in next, List do
 				print(i,v)
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
@@ -398,7 +399,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						DropToggled = false
 					end)
 				end
-				dropfunc.Add(tostring(i))
+				dropfunc.Add(tostring(v))
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
 			end
