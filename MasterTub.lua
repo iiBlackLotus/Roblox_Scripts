@@ -355,12 +355,14 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				local Y = (#DropdownHolder:GetChildren()-1) * 26
 				if DropdownOpen then 
 					local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,Y+36)})
+					TweenService:Create(ImageLabel,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 180}):Play()
 					tweenNew:Play()
 					tweenNew.Completed:Connect(function()
 						Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 					end)
 				else
 					local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,30)})
+					TweenService:Create(ImageLabel,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 0}):Play()
 					tweenNew:Play()
 					tweenNew.Completed:Connect(function()
 						Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
