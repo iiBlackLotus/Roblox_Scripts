@@ -369,17 +369,9 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 			
 			for i,v in next, List do
-				
+				print(i)
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
-
-					if ItemCount == 1 then
-						FrameSize = 39
-					elseif ItemCount == 2 then
-						FrameSize = 69
-					elseif ItemCount >= 3 then
-						FrameSize = 100
-					end
 
 					local DropdownItem = Instance.new("TextButton")
 					local ItemCorner = Instance.new("UICorner")
@@ -401,13 +393,11 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					ItemCorner.Parent = DropdownItem
 
 
-					DropdownItem.MouseButton1Click:Connect(
-						function()
+					DropdownItem.MouseButton1Click:Connect(function()
 							DropdownTitle.Text = Title .. " - " .. toadd
 							pcall(Callback, toadd)
 							DropToggled = false
-						end
-					)
+						end)
 				end
 				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
