@@ -350,7 +350,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownButton.ClipsDescendants = true
 
 			DropdownButton.MouseButton1Click:Connect(function()
-				TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
+				--TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
 				local Y = (#DropdownHolder:GetChildren()-1) * 26
 				if DropdownOpen then 
 					local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,Y+36)})
@@ -394,7 +394,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 
 					DropdownItem.MouseButton1Click:Connect(function()
-						DropdownTitle.Text = Title .. " - " .. toadd
+						DropdownTitle.Text = tostring(Title .. " - " .. toadd)
 						DropToggled = false
 					end)
 				end
