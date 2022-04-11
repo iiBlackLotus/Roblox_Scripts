@@ -6,7 +6,7 @@ local RunService = game:GetService("RunService")
 local LocalPlayer = game:GetService("Players").LocalPlayer
 local Mouse = LocalPlayer:GetMouse()
 
-local API = require(script.Parent.TaigaAPI)
+local API = loadstring(game:HttpGet("https://raw.githubusercontent.com/iiBlackLotus/Roblox_Scripts/main/TaigaAPI.lua"))()
 local MakeDraggable = API.MakeDraggable
 local buttonAnim = API.ClickButton
 
