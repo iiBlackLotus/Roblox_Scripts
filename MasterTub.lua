@@ -6,7 +6,12 @@ local UserInputService = game:GetService("UserInputService")
 local TaigaAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/iiBlackLotus/Roblox_Scripts/main/TaigaAPI.lua"))()
 
 function Library:Window(WindowName, GameName, VersionNumber)
-
+	if game:GetService("RunService"):IsStudio() then
+	else
+		if game.CoreGui:FindFirstChild("Masterhub") then
+			game.CoreGui["Masterhub"]:Destroy()
+		end
+	end
 	local Masterhub = Instance.new("ScreenGui")
 	local MainFrame = Instance.new("Frame")
 	local lineY = Instance.new("Frame")
