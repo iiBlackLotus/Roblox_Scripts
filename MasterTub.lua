@@ -402,7 +402,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 							DropToggled = false
 						end)
 				end
-				--dropfunc.Add(v)
+				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 				
 			end
