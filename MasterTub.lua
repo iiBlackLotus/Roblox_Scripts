@@ -274,7 +274,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			local DropToggled = false
 			local FrameSize = 0
 			local ItemCount = 0
-			
+
 			local DropdownTemplate = Instance.new("Frame")
 			local Corner = Instance.new("UICorner")
 			local DropdownTitle = Instance.new("TextLabel")
@@ -282,7 +282,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			local DropdownHolder = Instance.new("ScrollingFrame")
 			local DropdownHolderLayout = Instance.new("UIListLayout")
 			local DropdownButton = Instance.new("TextButton")
-			
+
 			DropdownTemplate.Name = "DropdownTemplate"
 			DropdownTemplate.Parent = Container
 			DropdownTemplate.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
@@ -348,7 +348,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			DropdownButton.TextSize = 14.000
 			DropdownButton.ClipsDescendants = true
-			
+
 			DropdownButton.MouseButton1Click:Connect(function()
 				TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
 				local Y = (#DropdownHolder:GetChildren()-1) * 26
@@ -367,9 +367,9 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				end
 				DropdownOpen = not DropdownOpen
 			end)
-			
+
 			for i,v in next, List do
-				
+
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -381,30 +381,26 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownItem.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 					DropdownItem.Position = UDim2.new(0.0462962948, 0, 0, 0)
 					DropdownItem.Size = UDim2.new(0, 294, 0, 20)
-					DropdownItem.ZIndex = 4
+					DropdownItem.ZIndex = 10
 					DropdownItem.AutoButtonColor = true
 					DropdownItem.Font = Enum.Font.Gotham
 					DropdownItem.Text = v
 					DropdownItem.TextColor3 = Color3.fromRGB(255, 255, 255)
 					DropdownItem.TextSize = 15.000
-					DropdownItem.MouseButton1Click:Connect(function()
-						print("Hi","- ", DropdownItem.Name)
-					end)
+					
 					ItemCorner.CornerRadius = UDim.new(0, 3)
 					ItemCorner.Name = "ItemCorner"
 					ItemCorner.Parent = DropdownItem
-					
-					
+
+
 					DropdownItem.MouseButton1Click:Connect(function()
-						print("Click")
-							DropdownTitle.Text = Title .. " - " .. toadd
-							pcall(Callback, toadd)
-							DropToggled = false
-						end)
+						DropdownTitle.Text = Title .. " - " .. toadd
+						DropToggled = false
+					end)
 				end
 				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-				
+
 			end
 			return dropfunc
 		end
