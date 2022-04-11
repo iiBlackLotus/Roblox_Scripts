@@ -387,14 +387,14 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownItem.Text = v
 					DropdownItem.TextColor3 = Color3.fromRGB(255, 255, 255)
 					DropdownItem.TextSize = 15.000
-
+					DropdownItem.MouseButton1Click:Connect(function()
+						print("Hi","- ", DropdownItem.Name)
+					end)
 					ItemCorner.CornerRadius = UDim.new(0, 3)
 					ItemCorner.Name = "ItemCorner"
 					ItemCorner.Parent = DropdownItem
 					
-					DropdownItem.MouseButton1Click:Connect(function()
-						print("Hi","- ", DropdownItem.Name)
-					end)
+					
 					DropdownItem.MouseButton1Click:Connect(function()
 						print("Click")
 							DropdownTitle.Text = Title .. " - " .. toadd
@@ -402,7 +402,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 							DropToggled = false
 						end)
 				end
-				dropfunc.Add(v)
+				--dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 				
 			end
