@@ -341,7 +341,24 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			DropdownButton.TextSize = 14.000
 			DropdownButton.ClipsDescendants = true
-				
+				DropdownButton.MouseButton1Click:Connect(function()
+					TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
+					local Y = (#DropdownHolder:GetChildren()-1) * 26
+					if DropdownOpen then 
+						local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,Y+36)})
+						tweenNew:Play()
+						tweenNew.Completed:Connect(function()
+							Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+						end)
+					else
+						local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,30)})
+						tweenNew:Play()
+						tweenNew.Completed:Connect(function()
+							Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
+						end)
+					end
+					DropdownOpen = not DropdownOpen
+				end)
 			for i,v in next, List do
 				local DropdownItem = Instance.new("TextButton")
 				local ItemCorner = Instance.new("UICorner")
@@ -367,24 +384,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					pcall(Callback)
 				end)
 				
-				DropdownButton.MouseButton1Click:Connect(function()
-					TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
-					local Y = (#DropdownHolder:GetChildren()-1) * 26
-					if DropdownOpen then 
-						local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,Y+36)})
-						tweenNew:Play()
-						tweenNew.Completed:Connect(function()
-							Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-						end)
-					else
-						local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,30)})
-						tweenNew:Play()
-						tweenNew.Completed:Connect(function()
-							Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-						end)
-					end
-					DropdownOpen = not DropdownOpen
-				end)
+				
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 			end
 		end
