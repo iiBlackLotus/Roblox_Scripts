@@ -276,10 +276,8 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			local ImageLabel = Instance.new("ImageLabel")
 			local DropdownHolder = Instance.new("ScrollingFrame")
 			local DropdownHolderLayout = Instance.new("UIListLayout")
-			local DropdownItem = Instance.new("TextButton")
-			local ItemCorner = Instance.new("UICorner")
 			local DropdownButton = Instance.new("TextButton")
-
+			
 			DropdownTemplate.Name = "DropdownTemplate"
 			DropdownTemplate.Parent = Container
 			DropdownTemplate.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
@@ -366,11 +364,6 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 			
 			for i,v in next, List do
-
-				DropdownItem.MouseButton1Click:Connect(function()
-					DropdownTitle.Text = v
-					pcall(Callback)
-				end)
 				
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
@@ -410,8 +403,6 @@ function Library:Window(WindowName, GameName, VersionNumber)
 							DropToggled = false
 						end
 					)
-
-					DropdownHolder.CanvasSize = UDim2.new(0, 0, 0, DropdownHolderLayout.AbsoluteContentSize.Y + 15)
 				end
 
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
