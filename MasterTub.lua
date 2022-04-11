@@ -415,8 +415,9 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				end
 
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
-				return dropfunc
+				
 			end
+			return dropfunc
 		end
 
 		function Containers:Slider(Text, min, max, start, callback)
