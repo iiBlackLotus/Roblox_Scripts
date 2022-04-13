@@ -414,7 +414,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownItem.MouseButton1Click:Connect(function()
 						DropdownTitle.Text = tostring(DropdownItem.Text)
 						DropToggled = false
-						
+						pcall(Callback)
 					end)
 				end
 				
@@ -583,7 +583,27 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			end)
 			Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 		end
+		
+		function Containers:Label(Title)
+			local TextLabel = Instance.new("TextLabel")
+			local ToggleCorner = Instance.new("UICorner")
 
+			TextLabel.Parent = Container
+			TextLabel.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
+			TextLabel.Size = UDim2.new(0, 333, 0, 31)
+			TextLabel.Font = Enum.Font.Gotham
+			TextLabel.Text = Title
+			TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			TextLabel.TextSize = 16.000
+			if TextLabel.TextFits == false then
+				TextLabel.TextScaled = true
+			end
+			
+			ToggleCorner.CornerRadius = UDim.new(0, 5)
+			ToggleCorner.Name = "ToggleCorner"
+			ToggleCorner.Parent = TextLabel
+		end
+		
 		function Containers:Toggle(Title, Callback)
 			local ToggleTemplate = Instance.new("TextButton")
 			local ToggleCorner = Instance.new("UICorner")
