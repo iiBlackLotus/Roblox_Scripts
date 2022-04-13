@@ -3,7 +3,7 @@ local Library = {}
 local TweenService = game:GetService("TweenService")
 local UserInputService = game:GetService("UserInputService")
 
-local TaigaAPI = loadstring(game:HttpGet("https://raw.githubusercontent.com/iiBlackLotus/Roblox_Scripts/main/TaigaAPI.lua"))()
+local TaigaAPI = game:GetService("RunService"):IsStudio() and require(script.TaigaAPI) or loadstring(game:HttpGet("https://raw.githubusercontent.com/iiBlackLotus/Roblox_Scripts/main/TaigaAPI.lua"))()
 
 function Library:Window(WindowName, GameName, VersionNumber)
 	if game:GetService("RunService"):IsStudio() then
@@ -271,6 +271,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 		function Containers:Dropdown(Title, List, Callback)
 			local DropdownOpen = true
 			local dropfunc = {}
+			local dropdownItems = {}
 			
 			local DropToggled = false
 			local FrameSize = 0
@@ -278,7 +279,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 			local DropdownTemplate = Instance.new("Frame")
 			local Corner = Instance.new("UICorner")
-			local DropdownTitle = Instance.new("TextLabel")
+			local DropdownTitle = Instance.new("TextBox")
 			local ImageLabel = Instance.new("ImageLabel")
 			local DropdownHolder = Instance.new("ScrollingFrame")
 			local DropdownHolderLayout = Instance.new("UIListLayout")
@@ -302,7 +303,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 			DropdownTitle.BackgroundTransparency = 1.000
 			DropdownTitle.Position = UDim2.new(0.0420420431, 0, 0, 0)
-			DropdownTitle.Size = UDim2.new(0, 316, 0, 30)
+			DropdownTitle.Size = UDim2.new(0, 83, 0, 30)
 			DropdownTitle.ZIndex = 2
 			DropdownTitle.Font = Enum.Font.Gotham
 			DropdownTitle.Text = "Select One"
@@ -349,14 +350,14 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownButton.TextColor3 = Color3.fromRGB(0, 0, 0)
 			DropdownButton.TextSize = 14.000
 			DropdownButton.ClipsDescendants = true
-
-			DropdownButton.MouseButton1Click:Connect(function()
-				--TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
-				local Y = (#DropdownHolder:GetChildren()-1) * 26
-				if DropdownOpen then 
+			
+			
+			local function ToggleDropdown(Boolean)
+				Y = (#DropdownHolder:GetChildren()-1) * 26
+				if Boolean then 
 					TweenService:Create(ImageLabel,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 180}):Play()
 					local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,Y+36)})
-					
+
 					tweenNew:Play()
 					tweenNew.Completed:Connect(function()
 						Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
@@ -364,17 +365,29 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				else
 					TweenService:Create(ImageLabel,TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Rotation = 0}):Play()
 					local tweenNew = TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,30)})
-					
+
 					tweenNew:Play()
 					tweenNew.Completed:Connect(function()
 						Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 					end)
 				end
-				DropdownOpen = not DropdownOpen
+				
+			end
+			
+			DropdownButton.MouseButton1Click:Connect(function()
+				--TaigaAPI.CircleAnimation(DropdownButton, Color3.fromRGB(205,205,205), Color3.fromRGB(125,125,125))
+				if DropdownOpen then
+					ToggleDropdown(DropdownOpen)
+					DropdownOpen = false
+				else
+					ToggleDropdown(DropdownOpen)
+					DropdownOpen = true
+				end
+				
 			end)
 
 			for i, v in next, List do
-		
+
 				function dropfunc:Add(toadd)
 					ItemCount = ItemCount + 1
 
@@ -392,21 +405,55 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownItem.Text = tostring(v)
 					DropdownItem.TextColor3 = Color3.fromRGB(255, 255, 255)
 					DropdownItem.TextSize = 15.000
-					
+
 					ItemCorner.CornerRadius = UDim.new(0, 3)
 					ItemCorner.Name = "ItemCorner"
 					ItemCorner.Parent = DropdownItem
 
-
+					table.insert(dropdownItems, v)
 					DropdownItem.MouseButton1Click:Connect(function()
 						DropdownTitle.Text = tostring(DropdownItem.Text)
 						DropToggled = false
+						
 					end)
 				end
+				
 				dropfunc.Add(v)
 				Container.CanvasSize = UDim2.new(0, 0, 0, ContainerLayout.AbsoluteContentSize.Y)
 
 			end
+			
+			local function search(itemString)
+				itemString = string.lower(itemString)
+				local FoundItems = {}
+				for _,s in pairs(DropdownHolder:GetChildren()) do
+					if s:IsA("TextButton") then
+						if string.match(string.lower(s.Text), itemString) then
+							FoundItems[s] = true
+						end
+					end
+				end
+				for i,v in pairs(DropdownHolder:GetChildren()) do
+					if v:IsA("TextButton") then
+						if FoundItems[v] == true then
+							v.Visible = true
+						else
+							v.Visible = false
+						end
+					end
+				end
+				
+				return FoundItems
+			end
+			
+			DropdownTitle:GetPropertyChangedSignal("Text"):Connect(function(String)
+				if DropdownOpen == true then 
+					ToggleDropdown(true)
+					DropdownOpen = false
+				end
+				search(DropdownTitle.Text)
+			end)
+
 			return dropfunc
 		end
 
