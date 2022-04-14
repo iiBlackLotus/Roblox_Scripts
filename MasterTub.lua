@@ -453,6 +453,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownOpen = false
 				end
 				local SearchTable = search(DropdownTitle.Text)
+				rprintconsole(#SearchTable)
 				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,#SearchTable+36)}):Play()
 			end)
 
