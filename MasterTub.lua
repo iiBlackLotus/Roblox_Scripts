@@ -446,7 +446,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					end
 				end
 				
-				return FoundItems
+				return FoundItems, count
 			end
 			
 			DropdownTitle:GetPropertyChangedSignal("Text"):Connect(function(String)
@@ -454,8 +454,8 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					ToggleDropdown(true)
 					DropdownOpen = false
 				end
-				local SearchTable = search(DropdownTitle.Text)
-				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(#SearchTable*26)+36)}):Play()
+				local SearchTable, count = search(DropdownTitle.Text)
+				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(count*26)+36)}):Play()
 			end)
 
 			return dropfunc
