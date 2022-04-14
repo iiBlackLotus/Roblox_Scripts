@@ -412,11 +412,9 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 					table.insert(dropdownItems, v)
 					DropdownItem.MouseButton1Click:Connect(function()
-						if isFocused == false then 
+						rconsolewarn(v)
 							DropdownTitle.Text = tostring(DropdownItem.Text)
 							pcall(Callback, DropdownItem.Text)
-						end
-						
 						DropToggled = false
 					end)
 				end
