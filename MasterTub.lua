@@ -452,7 +452,8 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					ToggleDropdown(true)
 					DropdownOpen = false
 				end
-				search(DropdownTitle.Text)
+				local SearchTable = search(DropdownTitle.Text)
+				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,#SearchTable+36)}):Play()
 			end)
 
 			return dropfunc
@@ -748,7 +749,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			KeybindText.TextColor3 = Color3.fromRGB(255, 255, 255)
 			KeybindText.TextSize = 15.000
 			KeybindText.TextXAlignment = Enum.TextXAlignment.Left
-
+			
 			keybind_name = tostring(keybind_name or "New Keybind")
 			callback = typeof(callback) == "function" and callback or function()end
 			keybind_options = typeof(keybind_options) == "table" and keybind_options or {}
