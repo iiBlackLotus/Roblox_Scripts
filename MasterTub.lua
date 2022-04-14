@@ -323,7 +323,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			DropdownTitle.Size = UDim2.new(0, 83, 0, 30)
 			DropdownTitle.ZIndex = 2
 			DropdownTitle.Font = Enum.Font.Gotham
-			DropdownTitle.Text = "Select One"
+			DropdownTitle.Text = Title
 			DropdownTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
 			DropdownTitle.TextSize = 15.000
 			DropdownTitle.TextXAlignment = Enum.TextXAlignment.Left
