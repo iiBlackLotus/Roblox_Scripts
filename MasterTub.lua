@@ -459,6 +459,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						DropToggled = false
 						local t, c = search("")
 						TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(c*26)+36)}):Play()
+						ToggleDropdown(false)
 					end)
 				end
 				
