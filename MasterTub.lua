@@ -385,7 +385,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				end
 				
 			end)
-
+			local isFocused = false
 			for i, v in next, List do
 
 				function dropfunc:Add(toadd)
@@ -412,10 +412,12 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 					table.insert(dropdownItems, v)
 					DropdownItem.MouseButton1Click:Connect(function()
-						DropdownTitle.Text = tostring(DropdownItem.Text)
-						pcall(Callback, DropdownItem.Text)
-						DropToggled = false
+						if isFocused == false then 
+							DropdownTitle.Text = tostring(DropdownItem.Text)
+							pcall(Callback, DropdownItem.Text)
+						end
 						
+						DropToggled = false
 					end)
 				end
 				
@@ -449,7 +451,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				return FoundItems, count
 			end
 			
-			local isFocused = false
+			
 			DropdownTitle.Focused:Connect(function()
 				isFocused = true				
 			end)
@@ -465,8 +467,6 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						ToggleDropdown(true)
 						DropdownOpen = false
 					end
-					local SearchTable, count = search(DropdownTitle.Text)
-					TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(count*26)+36)}):Play()
 				else
 					
 				end
