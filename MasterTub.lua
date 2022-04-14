@@ -235,7 +235,24 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			Container.Visible = true
 
 		end)
+		
+		function Containers:line()
+			local LineTemplate = Instance.new("Frame")
+			local ButtonCorner = Instance.new("UICorner")
 
+			--Properties:
+
+			LineTemplate.Name = "LineTemplate"
+			LineTemplate.Parent = Container
+			LineTemplate.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
+			LineTemplate.BorderSizePixel = 0
+			LineTemplate.Size = UDim2.new(0.899999976, 0, 0, 4)
+
+			ButtonCorner.CornerRadius = UDim.new(0, 5)
+			ButtonCorner.Name = "ButtonCorner"
+			ButtonCorner.Parent = LineTemplate
+		end
+		
 		function Containers:Button(buttonName, callback)
 			local ButtonTemplate = Instance.new("Frame")
 			local ButtonCorner = Instance.new("UICorner")
@@ -492,7 +509,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			SliderTemplate.Parent = Container
 			SliderTemplate.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			SliderTemplate.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			SliderTemplate.LayoutOrder = 6
+			SliderTemplate.LayoutOrder = 0
 			SliderTemplate.Position = UDim2.new(0.0837500021, 0, 0.349431813, 0)
 			SliderTemplate.Size = UDim2.new(0, 333, 0, 42)
 			SliderTemplate.AutoButtonColor = false
@@ -836,7 +853,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			TextBoxTemplate.Parent = Container
 			TextBoxTemplate.BackgroundColor3 = Color3.fromRGB(24, 24, 24)
 			TextBoxTemplate.BorderColor3 = Color3.fromRGB(27, 42, 53)
-			TextBoxTemplate.LayoutOrder = 7
+			TextBoxTemplate.LayoutOrder = 0
 			TextBoxTemplate.Position = UDim2.new(0.0724999979, 0, 0.710227251, 0)
 			TextBoxTemplate.Size = UDim2.new(0, 333, 0, 31)
 
