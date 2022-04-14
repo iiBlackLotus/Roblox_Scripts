@@ -385,7 +385,32 @@ function Library:Window(WindowName, GameName, VersionNumber)
 				end
 				
 			end)
+			
+			local function search(itemString)
+				itemString = string.lower(itemString)
+				local FoundItems = {}
+				local count = 0
+				for _,s in pairs(DropdownHolder:GetChildren()) do
+					if s:IsA("TextButton") then
+						if string.match(string.lower(s.Text), itemString) then
+							FoundItems[s] = true
+							count = count + 1
+						end
+					end
+				end
+				for i,v in pairs(DropdownHolder:GetChildren()) do
+					if v:IsA("TextButton") then
+						if FoundItems[v] == true then
+							v.Visible = true
+						else
+							v.Visible = false
+						end
+					end
+				end
 
+				return FoundItems, count
+			end
+			
 			for i, v in next, List do
 
 				function dropfunc:Add(toadd)
@@ -415,7 +440,8 @@ function Library:Window(WindowName, GameName, VersionNumber)
 						DropdownTitle.Text = tostring(DropdownItem.Text)
 						pcall(Callback, DropdownItem.Text)
 						DropToggled = false
-						
+						local t, c = search(" ")
+						TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(c*26)+36)}):Play()
 					end)
 				end
 				
@@ -424,30 +450,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 
 			end
 			
-			local function search(itemString)
-				itemString = string.lower(itemString)
-				local FoundItems = {}
-				local count = 0
-				for _,s in pairs(DropdownHolder:GetChildren()) do
-					if s:IsA("TextButton") then
-						if string.match(string.lower(s.Text), itemString) then
-							FoundItems[s] = true
-							count = count + 1
-						end
-					end
-				end
-				for i,v in pairs(DropdownHolder:GetChildren()) do
-					if v:IsA("TextButton") then
-						if FoundItems[v] == true then
-							v.Visible = true
-						else
-							v.Visible = false
-						end
-					end
-				end
-				
-				return FoundItems, count
-			end
+		
 			
 			local isFocused = false
 			DropdownTitle.Focused:Connect(function()
@@ -466,8 +469,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					local SearchTable, count = search(DropdownTitle.Text)
 					TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(count*26)+36)}):Play()
 				else
-					local t, c = search(" ")
-					TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(count*26)+36)}):Play()
+					
 				end
 			end)
 
