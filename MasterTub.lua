@@ -413,8 +413,9 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					table.insert(dropdownItems, v)
 					DropdownItem.MouseButton1Click:Connect(function()
 						DropdownTitle.Text = tostring(DropdownItem.Text)
+						pcall(Callback, DropdownItem.Text)
 						DropToggled = false
-						pcall(Callback)
+						
 					end)
 				end
 				
