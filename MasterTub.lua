@@ -427,10 +427,12 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			local function search(itemString)
 				itemString = string.lower(itemString)
 				local FoundItems = {}
+				local count = 0
 				for _,s in pairs(DropdownHolder:GetChildren()) do
 					if s:IsA("TextButton") then
 						if string.match(string.lower(s.Text), itemString) then
 							FoundItems[s] = true
+							count = count + 1
 						end
 					end
 				end
@@ -453,8 +455,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 					DropdownOpen = false
 				end
 				local SearchTable = search(DropdownTitle.Text)
-				rprintconsole(#SearchTable)
-				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,#SearchTable+36)}):Play()
+				TweenService:Create(DropdownTemplate, TweenInfo.new(.8, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),{Size = UDim2.new(.9,0,0,(#SearchTable*26)+36)}):Play()
 			end)
 
 			return dropfunc
