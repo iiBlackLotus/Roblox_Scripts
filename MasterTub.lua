@@ -866,7 +866,7 @@ function Library:Window(WindowName, GameName, VersionNumber)
 			Box.Position = UDim2.new(0.621621609, 0, 0.129032254, 0)
 			Box.Size = UDim2.new(0, 119, 0, 23)
 			Box.Font = Enum.Font.Gotham
-			Box.Text = "Random Key"
+			Box.Text = "Enter Text"
 			Box.TextColor3 = Color3.fromRGB(0, 0, 0)
 			Box.TextSize = 15.000
 
